@@ -7,7 +7,7 @@ use clap::{CommandFactory, Parser};
 use clap_complete::generate;
 use std::{io, path::Path};
 
-/// Generate a Bitcoin wallet from a text seed.
+/// Generate a Solana  wallet from a text seed.
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 pub struct SolanaArgs {
