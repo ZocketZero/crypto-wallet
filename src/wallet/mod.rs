@@ -19,13 +19,19 @@ impl Wallet {
             if !raw {
                 print!("Private key: ");
             }
-            println!("{}", self.private_key);
+            print!("{}", self.private_key);
+            if !raw {
+                println!();
+            }
         }
         if print_mode.is_public() {
             if !raw {
                 print!("Public key: ");
             }
-            println!("{}", self.public_key)
+            print!("{}", self.public_key);
+            if !raw {
+                println!();
+            }
         }
     }
 }
