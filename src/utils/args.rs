@@ -15,9 +15,11 @@ pub struct Args {
 #[derive(Subcommand, Debug)]
 enum Command {
     /// Generate Bitcoin wallet
+    #[clap(visible_alias = "btc")]
     Bitcoin(BtcArgs),
 
     /// Generate Solana wallet
+    #[clap(visible_alias = "sol")]
     Solana(SolanaArgs),
     /// Generate shell completion
     Completion { shell: Shell },
