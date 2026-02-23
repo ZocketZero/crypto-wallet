@@ -6,6 +6,7 @@ pub enum PrintMode {
     Secret,
     P,
     Public,
+    Json,
 }
 
 impl std::str::FromStr for PrintMode {
@@ -16,6 +17,7 @@ impl std::str::FromStr for PrintMode {
             "a" | "all" => Ok(PrintMode::All),
             "s" | "secret" => Ok(PrintMode::Secret),
             "p" | "public" => Ok(PrintMode::Public),
+            "json" => Ok(PrintMode::Json),
             _ => Err(format!("Invalid print mode: {}", s)),
         }
     }
@@ -29,5 +31,8 @@ impl PrintMode {
     }
     pub fn is_public(&self) -> bool {
         matches!(self, Self::A | Self::All | Self::P | Self::Public)
+    }
+    pub fn is_json(&self) -> bool {
+        matches!(self, Self::Json)
     }
 }
