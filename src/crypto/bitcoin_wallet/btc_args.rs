@@ -39,7 +39,7 @@ pub struct BtcArgs {
 
     /// Generate uncompressed keys (WIF will start with '5' instead of 'K' or 'L')
     #[arg(short, long, default_value_t = false)]
-    pub compressed: bool,
+    pub uncompressed: bool,
 }
 
 impl BtcArgs {
@@ -55,13 +55,13 @@ impl BtcArgs {
             }
         } else if self.random {
             let hash = random_hash();
-            BtcWallet::from_hash(&hash, self.compressed).print(self.print.clone(), self.raw);
+            BtcWallet::from_hash(&hash, !self.uncompressed).print(self.print.clone(), self.raw);
         } else if let Some(seed_text) = &self.seed_text {
-            let wallet = BtcWallet::new(seed_text, self.compressed);
+            let wallet = BtcWallet::new(seed_text, !self.uncompressed);
             wallet.print(self.print.clone(), self.raw);
         } else if let Some(hash) = &self.hash {
             if let Ok(hash) = read_hash(hash) {
-                BtcWallet::from_hash(&hash, self.compressed).print(self.print.clone(), self.raw);
+                BtcWallet::from_hash(&hash, !self.uncompressed).print(self.print.clone(), self.raw);
             } else {
                 eprintln!("Invalid hash");
             }
@@ -69,7 +69,7 @@ impl BtcArgs {
             if Path::new(path).exists()
                 && let Ok(hash) = hash_from_file(path)
             {
-                BtcWallet::from_hash(&hash, self.compressed).print(self.print.clone(), self.raw);
+                BtcWallet::from_hash(&hash, !self.uncompressed).print(self.print.clone(), self.raw);
             } else {
                 eprintln!("File not found");
             }
