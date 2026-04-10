@@ -16,7 +16,10 @@ pub trait WalletTrait {
 impl Wallet {
     pub fn print(&self, print_mode: PrintMode, raw: bool) {
         if print_mode.is_json() {
-            print!("{{\"private\":\"{}\",\"public\":\"{}\"}}", self.private_key, self.public_key);
+            print!(
+                "{{\"private\":\"{}\",\"public\":\"{}\"}}",
+                self.private_key, self.public_key
+            );
             return;
         }
         if print_mode.is_secret() {
